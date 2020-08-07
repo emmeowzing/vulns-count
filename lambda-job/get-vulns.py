@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Query an org. and return a list of unmonitored EC2 instances.
+Query server instances' vulnerability counts and publish them to DD.
 """
 
 from typing import Tuple, Dict, Any
