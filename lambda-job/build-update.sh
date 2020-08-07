@@ -1,5 +1,5 @@
 #! /bin/bash
-# Build a package under src/ of the contents of src/ to be uploaded to Lambda.
+# Build a package under src/ of the contents of src/ and the venv to be uploaded and invoked in Lambda.
 
 if ! [ -d src/package ]
 then
@@ -8,7 +8,9 @@ fi
 
 pip install --target ./src/package -r ../requirements.txt 2>/dev/null
 cp src/get-vulns.py src/package
-zip -r9 src/package.zip src/package
+cd src/package || exit
+zip -r9 ../package.zip .
+cd - || exit
 
 if [ -d src/package ]
 then
