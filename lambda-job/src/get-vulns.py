@@ -9,7 +9,6 @@ from typing import Tuple, Dict, Any
 
 from mohawk import Sender
 from datadog import initialize as dd_initialize, api as dd_api
-from botocore.exceptions import ClientError
 
 import json
 import requests
