@@ -30,11 +30,11 @@ class DataDogAPI:
     def __exit__(self, *args: Any) -> None:
         pass
 
-    def publishMetric(self, datum: int, metricName: str) -> None:
+    def publishMetric(self, host: str, datum: int, metricName: str) -> None:
         """
         Publish a metric to DD for display as a metric in a dashboard.
         """
-        dd_api.Metric.send(metric=metricName, points=datum)
+        dd_api.Metric.send(metric=metricName, points=datum, host=host)
 
 
 def make_vulns_request(credentials: Dict[str, str], org_id: str, endpoint: str, content: str) -> Tuple[dict, int]:
@@ -139,7 +139,7 @@ def entrypoint(event: Any ='', context: Any ='') -> None:
     with DataDogAPI(**dd_credentials) as dd_api:
         for instance in agent_ids:
             cves, count = make_vulns_request(credentials, org_id, vuln_endpoint, content='?status=active&agentId=' + agent_ids[instance])
-            dd_api.publishMetric(datum=count, metricName=instance)
+            dd_api.publishMetric(host=instance, datum=count, metricName=instance)
 
 
 if __name__ == '__main__':

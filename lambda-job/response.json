@@ -1,1 +1,1 @@
-{"errorMessage": "'token'", "errorType": "KeyError", "stackTrace": ["  File \"/var/task/get-vulns.py\", line 139, in entrypoint\n    cves, count = make_vulns_request(credentials, org_id, vuln_endpoint, content='?status=active&agentId=' + agent_ids[instance])\n", "  File \"/var/task/get-vulns.py\", line 68, in make_vulns_request\n    _token = _cves['token']\n"]}
+null
