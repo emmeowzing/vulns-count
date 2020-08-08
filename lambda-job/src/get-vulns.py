@@ -70,7 +70,7 @@ def make_vulns_request(credentials: Dict[str, str], org_id: str, endpoint: str, 
     while _token:
         data = _req(_token)
         _token = data['token']
-        _cves['cves'].append(data['cves'])
+        _cves['cves'] += data['cves']
     _cves['token'] = None
     return _cves, len(_cves['cves'])
 
