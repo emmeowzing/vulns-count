@@ -112,7 +112,7 @@ def entrypoint(event: Any ='', context: Any ='') -> None:
         region_name='us-east-2'
     )
 
-    endpoint = 'https://api.threatstack.com/v2/vulnerabilities'
+    vuln_endpoint = 'https://api.threatstack.com/v2/vulnerabilities'
 
     # The agent IDs we'd like to monitor.
     agent_ids = {
@@ -134,7 +134,7 @@ def entrypoint(event: Any ='', context: Any ='') -> None:
     dd_credentials = json.loads(get_secret(client, secret_name='datadog-app'))
 
     for instance in agent_ids:
-        cves, count = make_vulns_request(credentials, org_id, endpoint, content='?status=active&agentId=' + agent_ids[instance])
+        cves, count = make_vulns_request(credentials, org_id, vuln_endpoint, content='?status=active&agentId=' + agent_ids[instance])
         with DataDogAPI(**dd_credentials) as dd_api:
             dd_api.publishMetric(datum=count, metricName=instance)
 

@@ -4,4 +4,4 @@ terraform.*
 lambda-job/src/package.zip
 lambda-job/src/requirements/
 __pycache__
-/lambda-job/response.json
+/lambda-job/src/response.json
