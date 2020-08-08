@@ -116,7 +116,9 @@ def entrypoint(event: Any ='', context: Any ='') -> None:
     # The agent IDs we'd like to monitor.
     agent_ids = {
         'ubuntu18': '1b2b713b-d8c5-11ea-b6f8-03a608d4baeb',
-        'centos7': '4908c645-d8c5-11ea-b58a-03108fc8af85'
+        'centos7': '4908c645-d8c5-11ea-b58a-03108fc8af85',
+        'al1': '10f21d52-d938-11ea-a9ab-1d16739b3847',
+        'al2': 'e387d550-d937-11ea-8511-338dc696eccd'
     }
 
     # Get my TS API credentials from my secrets manager.
