@@ -25,3 +25,9 @@ This project is being written in relation to ENG-10840 to plot vulnerability cou
     null
     ```
    if everything is configured in AWS correctly.
+   
+#### Plot
+
+You may see the [graph of points over time](https://app.datadoghq.com/dashboard/h2f-sc6-hdw/alerting-dashboard?from_ts=1596257151810&fullscreen_end_ts=1596862137555&fullscreen_paused=false&fullscreen_section=overview&fullscreen_start_ts=1596858537555&fullscreen_widget=1034263581791174&live=true&to_ts=1596861951810) in our Datadog account.
+
+![datadog graph](images/datadog_screenshot.png)
