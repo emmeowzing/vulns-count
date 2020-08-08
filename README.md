@@ -15,7 +15,7 @@ This project is being written in relation to ENG-10840 to plot vulnerability cou
     ```shell script
     aws-vault exec <profile_id> -- aws lambda invoke --function-name publish-vulns response.json && cat response.json | jq -r
     ```
-   This will output nothing but
+   This will output nothing but a status code block like
     ```shell script
     $ aws-vault exec support-soak -- aws lambda invoke --function-name publish-vulns response.json && cat response.json | jq -r
     {
