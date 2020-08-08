@@ -14,7 +14,8 @@ resource "aws_lambda_function" "vulns-lambda-job" {
   handler = "get-vulns.entrypoint"
   runtime = "python3.8"
 
-  # The following is ignored by git, to be built from the script build-update.sh.
+  # The following is ignored by git, to be built from the script build-update.sh. If the package is rebuilt with
+  # code changes, this will update the Lambda to reflect those changes.
   filename = "src/package.zip"
   source_code_hash = filebase64sha256("src/package.zip")
 
