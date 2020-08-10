@@ -30,11 +30,11 @@ class DataDogAPI:
     def __exit__(self, *args: Any) -> None:
         pass
 
-    def publishMetric(self, host: str, datum: int, metricName: str) -> None:
+    def publishMetric(self, host: str, datum: int, name: str) -> None:
         """
         Publish a metric to DD for display as a metric in a dashboard.
         """
-        dd_api.Metric.send(metric=metricName, points=datum, host=host)
+        dd_api.Metric.send(metric=name, points=datum, host=host)
 
 
 def make_vulns_request(credentials: Dict[str, str], org_id: str, endpoint: str, content: str) -> Tuple[dict, int]:
@@ -62,6 +62,7 @@ def make_vulns_request(credentials: Dict[str, str], org_id: str, endpoint: str, 
                 'Content-Type': 'application/json'
             }
         )
+
         return response.json()
 
     _cves = _req()
@@ -115,9 +116,9 @@ def entrypoint(event: Any ='', context: Any ='') -> None:
 
     # The agent IDs we'd like to monitor.
     agent_ids = {
-        'ubuntu18': '1b2b713b-d8c5-11ea-b6f8-03a608d4baeb',
-        'centos7': '4908c645-d8c5-11ea-b58a-03108fc8af85',
-        'al1': '10f21d52-d938-11ea-a9ab-1d16739b3847',
+        'ubuntu18': '07afbf74-d984-11ea-8511-fb0ba3ece8a6',
+        'centos7': 'ff1c9de1-d983-11ea-bff8-e5ab7b74a2f6',
+        'al1': 'a0a03b41-d983-11ea-8511-a30ebc11a5a5',
         # Turns out, we don't get vuln info about AL2.
         # https://threatstack.zendesk.com/hc/en-us/articles/200343805
         #'al2': 'e387d550-d937-11ea-8511-338dc696eccd'
@@ -139,7 +140,7 @@ def entrypoint(event: Any ='', context: Any ='') -> None:
     with DataDogAPI(**dd_credentials) as dd_api:
         for instance in agent_ids:
             cves, count = make_vulns_request(credentials, org_id, vuln_endpoint, content='?status=active&agentId=' + agent_ids[instance])
-            dd_api.publishMetric(host=instance, datum=count, metricName=instance)
+            dd_api.publishMetric(host=instance, datum=count, name=instance)
 
 
 if __name__ == '__main__':
